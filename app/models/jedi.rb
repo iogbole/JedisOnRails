@@ -1,9 +1,16 @@
 class Jedi < ActiveRecord::Base
-	mount_uploader :picture, PictureUploader
-   :set_location
+mount_uploader :picture, PictureUploader
+attr_accessor :street_address, :street_address_2, :city, :postal_code, :county, :country
+before_save :set_location
 
-  def set_location
-    location = "#{street_address} #{street_address_2} #{county} #{postal_code} #{country}"
+=begin
+def set_location ()
+    location = "#{street_address} #{street_address_2}"
   end
-
+    
+=end
+    def set_location (*args)
+        #puts "DEBUG, got here " + @street_address
+        self.location = @street_address + " " + @street_address_2 + " " + @city + " " + @postal_code + " " + @county + " " + @country
+ end
 end
