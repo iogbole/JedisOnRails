@@ -2,7 +2,8 @@
  	
 <h1>Editing jedi</h1>
 
-<%= render 'form' %>
+   <%=  render :partial => 'form', :locals => {:address_form => 'simple_address'} %>
+
 
 <%= link_to 'Show', @jedi %> |
 <%= link_to 'Back', jedis_path %>

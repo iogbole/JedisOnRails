@@ -2,8 +2,7 @@
 
 <h2>Listing Jedis</h2>
 
-
- <div class="datagrid">
+<div class="datagrid">
 <table align ="center">
 <thead>
 <tr>
@@ -26,8 +25,8 @@
         <td><%= jedi.location %></td>
         <td> <%= image_tag(jedi.picture_url, :width => 50) if jedi.picture.present? %></td>
        
-        <td><%= link_to 'Show', jedi %> | </td>
-        <td><%= link_to 'Edit', edit_jedi_path(jedi) %> | </td>
+        <td><%= link_to 'Show', jedi %>  </td>
+        <td><%= link_to 'Edit', edit_jedi_path(jedi) %> </td>
         <td><%= link_to 'Destroy', jedi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
 

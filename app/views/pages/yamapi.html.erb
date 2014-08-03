@@ -1,0 +1,107 @@
+<script>
+    function post_msg() {
+     
+        yam.getLoginStatus( function(response) {
+            if (response.authResponse) {
+              //call the Post function
+            yamPostRequest(this);
+                
+            } else {
+              alert("not logged in")
+                yam.login( function (response) {
+                  if (!response.authResponse) {
+                       //call the Post function
+                    yamPostRequest(this);
+                  }
+                });
+            }
+        });
+    }
+
+
+function yamPostRequest(val)  {
+   var msg_value = document.getElementById('msg_body').value;
+      if(msg_value ==""){
+        alert ("Message body cannot be empty!");
+        return false;
+      }else{
+
+        msgval = document.getElementById('msg_body').value
+      }
+      
+yam.platform.request(
+      { url: "https://api.yammer.com/api/v1/messages.json"
+      , method: "POST"
+      , data: { "body" : msgval}
+      , success: function (msg) { alert("Post was Successful!"); }
+      , error: function (msg) { alert("Post was Unsuccessful"); }
+      }
+      )
+}
+
+function GetCurrentUser(){
+    yam.getLoginStatus(
+  function(response) {
+    if (response.authResponse) {
+      alert("logged in")
+      console.log("logged in");
+      yam.platform.request({
+        url: "https://www.yammer.com/api/v1/users/current.json",     //this is one of many REST endpoints that are available
+        method: "GET",
+        data: {    //use the data object literal to specify parameters, as documented in the REST API section of this developer site
+          "letter": "a",
+          "page": "2",
+        },
+        success: function (user) { //print message response information to the console
+          alert("The request was successful.");
+          console.dir(user);
+          console.alert(user)
+        },
+        error: function (user) {
+          alert("There was an error with the request.");
+        }
+      });
+    }
+    else {
+      alert("not logged in, sure?")
+    }
+  }
+);
+  }
+    </script>
+
+<h2>Yammer API Devs</h2>
+<hr>
+
+<form name="myForm" method="get" action="/pages/yamapi">
+ <table cellspacing="2" cellpadding="2" border="0">
+ <tr>
+   <td align="right">Body</td>
+   <td>
+   <!-- <input type="text" name="msg_body" id="msg_body" /> -->
+
+   <textarea rows="4" cols="50" name="msg_body" id="msg_body"></textarea>
+
+  </td>
+ </tr>
+
+
+
+ <tr>
+ <td align="right"></td>
+ <td><input type="button" value="Post Message" onclick ="post_msg()" /></td>
+ </tr>
+ </table>
+ </form>
+
+
+
+
+    <button onclick='post_msg()'>Post on Yammer!</button>
+    <button onclick='GetCurrentUser()'>Get Current User</button>
+
+
+
+    
+
+    <!-- http://arcsnap.blogspot.co.uk/2012/07/yammer-javascript-api-tutorial.html -->

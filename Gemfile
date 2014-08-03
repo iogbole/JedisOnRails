@@ -7,6 +7,8 @@ gem 'rails', '4.1.2'
 gem 'sqlite3'
 #Picture uploader by Israel -06/07/2014
 gem 'carrierwave'
+#Devis auth - added by Israel 
+gem 'devise'
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

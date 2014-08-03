@@ -44,7 +44,7 @@ class JedisController < ApplicationController
   # PATCH/PUT /jedis/1.json
   def update
     respond_to do |format|
-      if @jedi.update(jedi_params)
+      if @jedi.update(jedi_editform_params)
         format.html { redirect_to @jedi, notice: 'Jedi was successfully updated.' }
         format.json { render :show, status: :ok, location: @jedi }
       else
@@ -72,7 +72,10 @@ class JedisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def jedi_params
-      #params.require(:jedi).permit(:first_name, :last_name, :sex, :location, :picture)
       params.require(:jedi).permit(:first_name, :last_name, :sex, :picture, :street_address, :street_address_2, :city, :postal_code, :county, :country)
+    end
+  
+  def jedi_editform_params
+      params.require(:jedi).permit(:first_name, :last_name, :sex, :location, :picture)
     end
 end

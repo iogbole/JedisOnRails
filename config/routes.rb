@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'pages/yamapi'
+   post 'pages/yamapi'
+  #get 'users', to 'users#sign_in'
+  
+  #get 'pages', to: 'pages#yamapi'
+
+  devise_for :users
   resources :jedis
 
   get 'welcome/index'
