@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head></head>
+<body>
+    <script type="text/javascript" src="https://assets.yammer.com/assets/platform_embed.js"></script>
+ 
+ <hr>
+
+<div id="embedded-feed" style="height:800px;width:640px; color:#6C1B1B; background:#7AA66E; "></div> 
+<div id="embedded-follow" style="height:100px;width:250px;"></div> 
+
+<script>
+yam.connect.actionButton({
+ container: "#embedded-follow",
+ network: "yam.usa.cc",
+ action: "follow"
+});
+
+</script>
+
+<hr>
+  <div id="embedded-like" style="height:100px;width:250px; "></div> 
+<script>
+yam.connect.actionButton({
+ container: "#embedded-like",
+ network: "yam.usa.cc",
+ action: "like"
+});
+
+</script>
+
+<hr>
+
+<script>
+yam.connect.embedFeed({
+  container: '#embedded-feed'
+          , network: 'yam.usa.cc'
+        , feedType: ''
+        , feedId: ''
+        , config: {
+             use_sso: true
+             , header: true
+             , footer: true
+             , showOpenGraphPreview: false
+             , defaultToCanonical: false
+             , hideNetworkName: false
+
+        }
+    });
+    </script>
+    
+
+</body>
+</html>

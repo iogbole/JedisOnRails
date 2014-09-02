@@ -1,0 +1,71 @@
+	<!DOCTYPE HTML>
+	<html ng-app>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+
+	</head>
+	<body>
+	 
+	 <p></p>
+	 <h3> Get and Filter all Jedis Example</h3>
+	<div ng-controller="JediNgControllerRepeat">
+		<table>
+			<tr>
+				<td colspan=2> Filter  :  <input type="text" ng-model="searchJedi"> </td>
+	          <td colspan=2> {{ searchJedi }}  </td>
+			</tr>
+			<tr>
+	        <td>userID</td>
+	        <td>First Name</td>
+	        <td>Last Name</td>
+	        <td>Address</td>
+			</tr>
+	 	 <tr ng-repeat ="jed in jedis | filter: searchJedi">
+	 		<td> {{ jed.id }}</td>
+	 		<td> {{ jed.first_name }}</td>
+	 		<td> {{ jed.first_name }}</td>
+	 		<td> {{ jed.location }}</td>
+	 		
+	 	</tr>
+	</table>
+
+	</div>
+		
+
+	 <br>
+	 <hr>
+
+
+	 <h3>Get Single Jedi </h3>
+
+
+	 	<div ng-controller="JediNgController">
+				<p>The ID is {{jedis.id}}</p>
+				<p>The content is {{jedis.first_name}}</p>
+				<p>The content is {{jedis.last_name}}</p>
+			</div>
+
+
+	  <h3> Constant Declaration using ng-init example</h3>
+
+	  <div ng-init="Jedis=[ 'Adoks','Israel', 'Esosa', 'Chris', 'Zebra']">
+	   <P></P>
+	 Search :  <input type="text" ng-model="name"> 
+      {{name}} 
+	 <table>
+	 	<tr ng-repeat ="jedi in Jedis | filter:name">
+	 		<td> {{ jedi }}</td>
+	 		<td></td>
+		 	</tr>
+
+	</table>
+
+
+
+	</div>
+
+
+
+	    </body>
+
+	</html>

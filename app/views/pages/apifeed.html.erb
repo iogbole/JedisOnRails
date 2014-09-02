@@ -1,0 +1,92 @@
+ <script type="text/javascript" data-app-id="nfeHCYBY4uEpNjn4Ww4hA" src="https://assets.yammer.com/assets/platform_js_sdk.js"></script>
+
+<script>
+    
+$scope.yammerRequest = function(){
+    yam.platform.request({
+        url: "messages/in_group/1312007.json?threaded=true",
+        //url: "messages.json?threaded=true",
+        //url: "messages.json?threaded=true",     //this is one of many REST endpoints that are available
+        method: "GET",
+        success: function (data) { 
+            //Angulars $scope getting lost when inside an external library
+            // so we need to find the controller, which we can use to get the $scope
+            //get the controller
+            var controllerElement = document.querySelector('[ng-controller=YammerFeedCtrl]')
+            //use angularjs to get the scope from the controller
+            var $scope= angular.element(controllerElement).scope();
+            //get the messages from the data
+            $scope.yammerfeed = data
+            $scope.convertDateStringsToDates($scope.yammerfeed)
+                            $scope.loaded = true
+            //make sure we apply the changes so they are reflected to the GUI
+            $scope.$apply();
+
+        },
+        error: function (user) {
+            alert("There was an error with the request.");
+        }
+    });
+}
+var init = function () {
+$scope.selectUser($scope.yammerUsers[0])
+    //all Javascript interaction need to be done via thier SDK
+    //login to yammer
+    //yam.platform.login()
+    //yam.connect.loginButton('#yammer-login', function (resp) { if (resp.authResponse) { document.getElementById('yammer-login').innerHTML = 'Welcome to Yammer!'; } }); 
+    // url: https://www.yammer.com/oauth2/access_token.json?client_id=[:client_id]&client_secret=[:client_secret]&code=[:code]
+
+    //check login status
+    yam.getLoginStatus(
+        function(response) {
+            if (response.authResponse) {  //if logged in
+                //request massages from yammer
+                var controllerElement = document.querySelector('[ng-controller=YammerFeedCtrl]')
+                //use angularjs to get the scope from the controller
+                var $scope= angular.element(controllerElement).scope();
+                $scope.yammerRequest();
+            }
+            else {
+                //alert("not logged in")
+                //all Javascript interaction need to be done via thier SDK
+                //login to yammer
+                yam.platform.login(
+                    function(response){
+                        if (response.authResponse) {
+                            //var controllerElement = document.querySelector('[ng-controller=YammerFeedCtrl]')
+                            ////use angularjs to get the scope from the controller
+                            //var $scope= angular.element(controllerElement).scope();
+                            //$scope.yammerRequest();
+                            yam.getLoginStatus(
+        function(response) {
+            if (response.authResponse) {
+                            yam.platform.request({
+        //url: "messages.json?threaded=true",
+        url: "messages/in_group/1312007.json?threaded=true",
+        //url: "messages.json?threaded=true",     //this is one of many REST endpoints that are available
+        method: "GET",
+        success: function (data) { 
+            //Angulars $scope getting lost when inside an external library
+            // so we need to find the controller, which we can use to get the $scope
+            //get the controller
+            var controllerElement = document.querySelector('[ng-controller=YammerFeedCtrl]')
+            //use angularjs to get the scope from the controller
+            var $scope= angular.element(controllerElement).scope();
+            //get the messages from the data
+            $scope.yammerfeed = data
+            $scope.convertDateStringsToDates($scope.yammerfeed)
+                $scope.loaded = true            
+            //make sure we apply the changes so they are reflected to the GUI
+            $scope.$apply();
+
+        },
+        error: function (data, data1, data2) {
+            alert(data.statusText);
+        }
+    });
+    }
+    });
+}
+})
+}
+    </script>

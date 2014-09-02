@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   get 'pages/yamapi'
-   post 'pages/yamapi'
+  post 'pages/yamapi'
+  
+  #get 'pages/yamembed.html.erb'
+ #http://stackoverflow.com/questions/4479233/static-pages-in-ruby-on-rails
+  match '/embed' => 'pages#yamembed',  via: [:get, :post]
+  match '/api' => 'pages#yamapi',  via: [:get, :post]
+  match '/ng' => 'pages#ng',  via: [:get, :post]
+  match '/list' => 'pages#list_jedis',  via: [:get, :post]
+   match '/apifeed' => 'pages#apifeed',  via: [:get, :post]
+
+
   #get 'users', to 'users#sign_in'
   
   #get 'pages', to: 'pages#yamapi'
